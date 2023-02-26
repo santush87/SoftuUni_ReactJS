@@ -14,14 +14,16 @@ export const UserList = ({ users }) => {
             .then((result) => {
                 setSelectedUser(result.user);
             });
-        // console.log(userId);
-        // getOne(userId).then((user) => setSelectedUser(user));
+    };
+
+    const detailsCloseHandler = () => {
+        setSelectedUser(null);
     };
     return (
         <div className="table-wrapper">
             {/* Overlap components */}
 
-            {selectedUser && <UserDetails user={selectedUser} />}
+            {selectedUser && <UserDetails user={selectedUser} onCloseAction={detailsCloseHandler} />}
 
             <table className="table">
                 <thead>

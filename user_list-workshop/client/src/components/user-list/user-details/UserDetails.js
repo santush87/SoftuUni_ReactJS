@@ -1,12 +1,12 @@
-export const UserDetails = ({ user }) => {
+export const UserDetails = ({ onCloseAction, user }) => {
     return (
         <div className="overlay">
-            <div className="backdrop"></div>
+            <div className="backdrop" onClick={onCloseAction}></div>
             <div className="modal">
                 <div className="detail-container">
                     <header className="headers">
                         <h2>User Detail</h2>
-                        <button className="btn close">
+                        <button className="btn close" onClick={onCloseAction}>
                             <svg
                                 aria-hidden="true"
                                 focusable="false"
