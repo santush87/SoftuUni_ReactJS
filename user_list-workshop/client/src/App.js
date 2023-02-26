@@ -2,7 +2,7 @@ import { Footer } from "./components/common/Footer";
 import { Header } from "./components/common/Header";
 import "./App.css";
 import { Search } from "./components/search/Search";
-import { UserSection } from "./components/user-section/UserSection";
+import { UserList } from "./components/user-list/UserList";
 import { useEffect, useState } from "react";
 
 const baseUrl = "http://localhost:3005/api";
@@ -26,7 +26,7 @@ function App() {
             <main className="main">
                 <section className="card users-container">
                     <Search />
-                    <UserSection />
+                    <UserList users={users} />
                 </section>
             </main>
             <Footer />
