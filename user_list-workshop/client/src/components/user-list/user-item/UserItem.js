@@ -1,15 +1,15 @@
-export const UserItem = ({ firstName, lastName, email, phoneNumber, createdAt, imageUrl, onDetailsClick }) => {
+export const UserItem = ({ user, onDetailsClick }) => {
     const baseImage = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
     return (
         <>
             <td>
-                <img src={imageUrl || baseImage} alt={`${firstName}'s profile`} className="image" />
+                <img src={user.imageUrl || baseImage} alt={`${user.firstName}'s profile`} className="image" />
             </td>
-            <td>{firstName}</td>
-            <td>{lastName}</td>
-            <td>{email}</td>
-            <td>{phoneNumber}</td>
-            <td>{createdAt}</td>
+            <td>{user.firstName}</td>
+            <td>{user.lastName}</td>
+            <td>{user.email}</td>
+            <td>{user.phoneNumber}</td>
+            <td>{user.createdAt}</td>
 
             <td className="actions">
                 <button className="btn edit-btn" title="Edit">
@@ -46,7 +46,7 @@ export const UserItem = ({ firstName, lastName, email, phoneNumber, createdAt, i
                         ></path>
                     </svg>
                 </button>
-                <button className="btn info-btn" title="Info" onClick={() => onDetailsClick(firstName)}>
+                <button className="btn info-btn" title="Info" onClick={() => onDetailsClick(user._id)}>
                     <svg
                         aria-hidden="true"
                         focusable="false"

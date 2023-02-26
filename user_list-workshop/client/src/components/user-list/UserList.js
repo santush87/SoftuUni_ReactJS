@@ -1,12 +1,27 @@
+import { useState } from "react";
+// import { getOne } from "../../services/UserService";
 import { UserItem } from "./user-item/UserItem";
+import { UserDetails } from "./user-details/UserDetails";
 
 export const UserList = ({ users }) => {
-    const detailsClickHandler = (firstName) => {
-        console.log(firstName);
+    const [selectedUser, setSelectedUser] = useState(null);
+
+    const baseUrl = "http://localhost:3005/api/users";
+
+    const detailsClickHandler = (userId) => {
+        fetch(`${baseUrl}/${userId}`)
+            .then((response) => response.json())
+            .then((result) => {
+                setSelectedUser(result.user);
+            });
+        // console.log(userId);
+        // getOne(userId).then((user) => setSelectedUser(user));
     };
     return (
         <div className="table-wrapper">
             {/* Overlap components */}
+
+            {selectedUser && <UserDetails user={selectedUser} />}
 
             <table className="table">
                 <thead>
@@ -108,7 +123,7 @@ export const UserList = ({ users }) => {
                 <tbody>
                     {users.map((user) => (
                         <tr key={user._id}>
-                            <UserItem {...user} onDetailsClick={detailsClickHandler} />
+                            <UserItem user={user} onDetailsClick={detailsClickHandler} />
                         </tr>
                     ))}
                 </tbody>
