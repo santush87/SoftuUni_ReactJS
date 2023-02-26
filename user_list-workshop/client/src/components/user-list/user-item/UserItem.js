@@ -1,4 +1,4 @@
-export const UserItem = ({ firstName, lastName, email, phoneNumber, createdAt, imageUrl }) => {
+export const UserItem = ({ firstName, lastName, email, phoneNumber, createdAt, imageUrl, onDetailsClick }) => {
     const baseImage = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
     return (
         <>
@@ -46,7 +46,7 @@ export const UserItem = ({ firstName, lastName, email, phoneNumber, createdAt, i
                         ></path>
                     </svg>
                 </button>
-                <button className="btn info-btn" title="Info">
+                <button className="btn info-btn" title="Info" onClick={onDetailsClick}>
                     <svg
                         aria-hidden="true"
                         focusable="false"
