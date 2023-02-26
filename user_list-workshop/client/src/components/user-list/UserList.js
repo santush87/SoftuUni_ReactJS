@@ -1,8 +1,8 @@
 import { UserItem } from "./user-item/UserItem";
 
 export const UserList = ({ users }) => {
-    const detailsClickHandler = () => {
-        console.log("Clicked");
+    const detailsClickHandler = (firstName) => {
+        console.log(firstName);
     };
     return (
         <div className="table-wrapper">

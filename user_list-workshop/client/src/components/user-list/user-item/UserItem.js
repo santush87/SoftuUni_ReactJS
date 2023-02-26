@@ -46,7 +46,7 @@ export const UserItem = ({ firstName, lastName, email, phoneNumber, createdAt, i
                         ></path>
                     </svg>
                 </button>
-                <button className="btn info-btn" title="Info" onClick={onDetailsClick}>
+                <button className="btn info-btn" title="Info" onClick={() => onDetailsClick(firstName)}>
                     <svg
                         aria-hidden="true"
                         focusable="false"
