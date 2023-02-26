@@ -26,6 +26,7 @@ function App() {
             <main className="main">
                 <section className="card users-container">
                     <Search />
+
                     <UserList users={users} />
                 </section>
             </main>
