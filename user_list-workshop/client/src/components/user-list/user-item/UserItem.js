@@ -1,7 +1,7 @@
 export const UserItem = ({ firstName, lastName, email, phoneNumber, createdAt, imageUrl }) => {
     const baseImage = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png";
     return (
-        <tr>
+        <>
             <td>
                 <img src={imageUrl || baseImage} alt={`${firstName}'s profile`} className="image" />
             </td>
@@ -64,6 +64,6 @@ export const UserItem = ({ firstName, lastName, email, phoneNumber, createdAt, i
                     </svg>
                 </button>
             </td>
-        </tr>
+        </>
     );
 };
