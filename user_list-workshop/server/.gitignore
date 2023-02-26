@@ -1,0 +1,15 @@
+# dependencies
+/node_modules
+
+# environment variables
+.env
+config
+controllers
+node_modules
+models
+public
+routes
+utils
+*.js
+*.json
+*.md
