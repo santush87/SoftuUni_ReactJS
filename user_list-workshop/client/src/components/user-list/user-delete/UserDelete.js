@@ -1,11 +1,13 @@
-export const UserDelete = ({ onCloseAction }) => {
+export const UserDelete = ({ onCloseAction, user }) => {
     return (
         <div className="overlay">
             <div className="backdrop" onClick={onCloseAction}></div>
             <div className="modal">
                 <div className="confirm-container">
                     <header className="headers">
-                        <h2>Are you sure you want to delete this account?</h2>
+                        <h2>
+                            Are you sure you want to delete {user.firstName} {user.lastName} account?
+                        </h2>
                         <button className="btn close" onClick={onCloseAction}>
                             <svg
                                 aria-hidden="true"
