@@ -131,7 +131,7 @@ export const UserEdit = ({ user, onCloseAction }) => {
                             <button id="action-save" className="btn" type="submit">
                                 Save
                             </button>
-                            <button id="action-cancel" className="btn" type="button">
+                            <button id="action-cancel" className="btn" type="button" onClick={onCloseAction}>
                                 Cancel
                             </button>
                         </div>

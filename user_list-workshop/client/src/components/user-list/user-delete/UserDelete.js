@@ -31,7 +31,7 @@ export const UserDelete = ({ onCloseAction, user }) => {
                             <button id="action-save" class="btn" type="submit">
                                 Delete
                             </button>
-                            <button id="action-cancel" class="btn" type="button">
+                            <button id="action-cancel" class="btn" type="button" onClick={onCloseAction}>
                                 Cancel
                             </button>
                         </div>
