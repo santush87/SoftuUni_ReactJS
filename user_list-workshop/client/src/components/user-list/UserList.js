@@ -3,8 +3,14 @@ import { useState } from "react";
 import { UserItem } from "./user-item/UserItem";
 import { UserDetails } from "./user-details/UserDetails";
 
+const userActions = {
+    Details: "details",
+    Edit: "edit",
+    Delete: "delete",
+};
+
 export const UserList = ({ users }) => {
-    const [selectedUser, setSelectedUser] = useState(null);
+    const [userAction, setUserAction] = useState({ user: null, action: null });
 
     const baseUrl = "http://localhost:3005/api/users";
 
@@ -12,18 +18,21 @@ export const UserList = ({ users }) => {
         fetch(`${baseUrl}/${userId}`)
             .then((response) => response.json())
             .then((result) => {
-                setSelectedUser(result.user);
+                setUserAction({
+                    user: result.user,
+                    action: userActions.Details,
+                });
             });
     };
 
     const detailsCloseHandler = () => {
-        setSelectedUser(null);
+        setUserAction({ user: null, action: null });
     };
     return (
         <div className="table-wrapper">
             {/* Overlap components */}
 
-            {selectedUser && <UserDetails user={selectedUser} onCloseAction={detailsCloseHandler} />}
+            {userAction.action == userActions.Details && <UserDetails user={userAction.user} onCloseAction={detailsCloseHandler} />}
 
             <table className="table">
                 <thead>
