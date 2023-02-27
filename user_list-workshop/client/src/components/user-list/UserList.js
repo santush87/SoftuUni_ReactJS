@@ -4,6 +4,7 @@ import { UserItem } from "./user-item/UserItem";
 import { UserDetails } from "./user-details/UserDetails";
 import { UserEdit } from "./user-edit/UserEdit";
 import { UserActions } from "./UserListConstants";
+import { UserDelete } from "./user-delete/UserDelete";
 
 export const UserList = ({ users }) => {
     const [userAction, setUserAction] = useState({ user: null, action: null });
@@ -32,6 +33,8 @@ export const UserList = ({ users }) => {
             {userAction.action == UserActions.Details && <UserDetails user={userAction.user} onCloseAction={closeHandler} />}
 
             {userAction.action == UserActions.Edit && <UserEdit user={userAction.user} onCloseAction={closeHandler} />}
+
+            {userAction.action == UserActions.Delete && <UserDelete user={userAction.user} onCloseAction={closeHandler} />}
 
             <table className="table">
                 <thead>
