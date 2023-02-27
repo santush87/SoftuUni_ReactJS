@@ -2,37 +2,36 @@ import { useState } from "react";
 // import { getOne } from "../../services/UserService";
 import { UserItem } from "./user-item/UserItem";
 import { UserDetails } from "./user-details/UserDetails";
-
-const userActions = {
-    Details: "details",
-    Edit: "edit",
-    Delete: "delete",
-};
+import { UserEdit } from "./user-edit/UserEdit";
+import { UserActions } from "./UserListConstants";
 
 export const UserList = ({ users }) => {
     const [userAction, setUserAction] = useState({ user: null, action: null });
 
     const baseUrl = "http://localhost:3005/api/users";
 
-    const detailsClickHandler = (userId) => {
+    const userActionlickHandler = (userId, actionType) => {
         fetch(`${baseUrl}/${userId}`)
             .then((response) => response.json())
             .then((result) => {
                 setUserAction({
                     user: result.user,
-                    action: userActions.Details,
+                    action: actionType,
                 });
             });
     };
 
-    const detailsCloseHandler = () => {
+    const closeHandler = () => {
         setUserAction({ user: null, action: null });
     };
+
     return (
         <div className="table-wrapper">
             {/* Overlap components */}
 
-            {userAction.action == userActions.Details && <UserDetails user={userAction.user} onCloseAction={detailsCloseHandler} />}
+            {userAction.action == UserActions.Details && <UserDetails user={userAction.user} onCloseAction={closeHandler} />}
+
+            {userAction.action == UserActions.Edit && <UserEdit user={userAction.user} onCloseAction={closeHandler} />}
 
             <table className="table">
                 <thead>
@@ -134,7 +133,7 @@ export const UserList = ({ users }) => {
                 <tbody>
                     {users.map((user) => (
                         <tr key={user._id}>
-                            <UserItem user={user} onDetailsClick={detailsClickHandler} />
+                            <UserItem user={user} onActionClick={userActionlickHandler} />
                         </tr>
                     ))}
                 </tbody>
