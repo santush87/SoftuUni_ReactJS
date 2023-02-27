@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import { getOne } from "../../services/UserService";
 import { UserItem } from "./user-item/UserItem";
 import { UserDetails } from "./user-details/UserDetails";
 import { UserEdit } from "./user-edit/UserEdit";
 import { UserActions } from "./UserListConstants";
 import { UserDelete } from "./user-delete/UserDelete";
+import { UserCreate } from "./user-create/UserCreate";
+import { create } from "../UserService";
 
-export const UserList = ({ users }) => {
+const baseUrl = "http://localhost:3005/api/users";
+
+export const UserList = () => {
+    const [users, setUsers] = useState([]);
     const [userAction, setUserAction] = useState({ user: null, action: null });
 
-    const baseUrl = "http://localhost:3005/api/users";
+    useEffect(() => {
+        fetch(baseUrl)
+            .then((response) => response.json())
+            .then((result) => {
+                setUsers(result.users);
+            });
+    }, []);
 
     const userActionlickHandler = (userId, actionType) => {
         fetch(`${baseUrl}/${userId}`)
@@ -26,6 +37,21 @@ export const UserList = ({ users }) => {
         setUserAction({ user: null, action: null });
     };
 
+    const userCreateHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+
+        const { firstName, lastName, email, imageUrl, phoneNumber, ...address } = Object.fromEntries(formData);
+
+        const userData = { firstName, lastName, email, imageUrl, phoneNumber, address };
+
+        create(userData).then((user) => {
+            setUsers((oldUsers) => [...oldUsers, user]);
+            closeHandler();
+        });
+    };
+
     return (
         <>
             <div className="table-wrapper">
@@ -36,6 +62,8 @@ export const UserList = ({ users }) => {
                 {userAction.action == UserActions.Edit && <UserEdit user={userAction.user} onCloseAction={closeHandler} />}
 
                 {userAction.action == UserActions.Delete && <UserDelete user={userAction.user} onCloseAction={closeHandler} />}
+
+                {userAction.action == UserActions.Add && <UserCreate onCloseAction={closeHandler} onUserCreate={userCreateHandler} />}
 
                 <table className="table">
                     <thead>
@@ -144,7 +172,9 @@ export const UserList = ({ users }) => {
                 </table>
             </div>
 
-            <button className="btn-add btn">Add new user</button>
+            <button className="btn-add btn" onClick={() => userActionlickHandler(null, UserActions.Add)}>
+                Add new user
+            </button>
         </>
     );
 };

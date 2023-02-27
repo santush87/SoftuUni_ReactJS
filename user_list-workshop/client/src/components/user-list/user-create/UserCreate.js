@@ -1,11 +1,11 @@
-export const UserEdit = ({ user, onCloseAction }) => {
+export const UserCreate = ({ onCloseAction, onUserCreate }) => {
     return (
         <div className="overlay">
             <div className="backdrop" onClick={onCloseAction}></div>
             <div className="modal">
                 <div className="user-container">
                     <header className="headers">
-                        <h2>Edit User</h2>
+                        <h2>Add User</h2>
                         <button className="btn close" onClick={onCloseAction}>
                             <svg
                                 aria-hidden="true"
@@ -24,7 +24,7 @@ export const UserEdit = ({ user, onCloseAction }) => {
                             </svg>
                         </button>
                     </header>
-                    <form>
+                    <form onSubmit={onUserCreate}>
                         <div className="form-row">
                             <div className="form-group">
                                 <label htmlFor="firstName">First name</label>
@@ -32,7 +32,7 @@ export const UserEdit = ({ user, onCloseAction }) => {
                                     <span>
                                         <i className="fa-solid fa-user"></i>
                                     </span>
-                                    <input id="firstName" name="firstName" type="text" defaultValue={user.firstName} />
+                                    <input id="firstName" name="firstName" type="text" />
                                 </div>
                                 <p className="form-error">First name should be at least 3 characters long!</p>
                             </div>
@@ -129,7 +129,7 @@ export const UserEdit = ({ user, onCloseAction }) => {
                         </div>
                         <div id="form-actions">
                             <button id="action-save" className="btn" type="submit">
-                                Edit
+                                Save
                             </button>
                             <button id="action-cancel" className="btn" type="button" onClick={onCloseAction}>
                                 Cancel
